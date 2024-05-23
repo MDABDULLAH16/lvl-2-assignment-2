@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create-product', productController.createProduct);
 
-// router.get('/', productController.getAllProducts);
+router.get('/', productController.getAllProducts);
 
 //find one product
 
