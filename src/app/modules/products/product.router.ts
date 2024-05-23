@@ -10,7 +10,9 @@ router.post('/create-product', productController.createProduct);
 router.get('/', productController.getAllProducts);
 
 //find one product
-
 router.get('/:productId', productController.getSingleProduct);
+
+//delete one product
+router.delete('/:productId', productController.deleteOneProduct);
 
 export const ProductRouter = router;

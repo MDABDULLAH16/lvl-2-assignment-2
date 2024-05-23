@@ -16,8 +16,14 @@ const getSingleProductFromDB = async (_id: string) => {
   const result = await productModel.findOne({ _id });
   return result;
 };
+
+const deleteOneProductFromDB = async (_id: string) => {
+  const result = await productModel.deleteOne({ _id });
+  return result;
+};
 export const productService = {
   createProductIntoDB,
   getAllProductsFromDb,
   getSingleProductFromDB,
+  deleteOneProductFromDB,
 };
