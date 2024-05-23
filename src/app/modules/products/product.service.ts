@@ -5,8 +5,7 @@ const createProductIntoDB = async (product: Product) => {
   const result = await productModel.create(product);
   return result;
 };
-//get all products
-
+//get all products from db
 const getAllProductsFromDb = async () => {
   const result = await productModel.find();
   return result;
