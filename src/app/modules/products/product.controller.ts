@@ -62,9 +62,21 @@ const deleteOneProduct = async (req: Request, res: Response) => {
   });
 };
 
+const updateQuantity = async (req: Request, res: Response) => {
+  const productId = req.params.productId;
+
+  const result = await productService.updateQuantityOnInventory(productId);
+  res.status(200).json({
+    success: true,
+    message: 'Quantity updated successfully!',
+    data: result,
+  });
+};
+
 export const productController = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   deleteOneProduct,
+  updateQuantity,
 };

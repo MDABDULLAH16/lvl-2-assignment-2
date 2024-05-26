@@ -17,8 +17,21 @@ const getSingleProductFromDB = async (_id: string) => {
   return result;
 };
 
+//delete by _id
 const deleteOneProductFromDB = async (_id: string) => {
   const result = await productModel.deleteOne({ _id });
+  return result;
+};
+
+const updateQuantityOnInventory = async (_id: string) => {
+  const product: any = await productModel.findOne({ _id });
+  const newQuantity = product.inventory.quantity - 1;
+  const result = await productModel.updateOne(
+    { _id },
+    // for decrement quantity only
+    // { $inc: { 'inventory.quantity': -1 } },
+    { $set: { 'inventory.quantity': newQuantity } },
+  );
   return result;
 };
 
@@ -27,4 +40,5 @@ export const productService = {
   getAllProductsFromDb,
   getSingleProductFromDB,
   deleteOneProductFromDB,
+  updateQuantityOnInventory,
 };
