@@ -17,4 +17,6 @@ router.delete('/:productId', productController.deleteOneProduct);
 
 router.put('/:productId', productController.updateQuantity);
 
+// router.get('/api/products?searchTerm=iphone', productController.searchProduct);
+
 export const ProductRouter = router;

@@ -35,10 +35,20 @@ const updateQuantityOnInventory = async (_id: string) => {
   return result;
 };
 
+// const productSearchByName = async (name: string) => {
+
+//   const products = await productModel.find({ name });
+//   const regex = new RegExp(products,'i'); // 'i' for case-insensitive
+//   const result = await productModel.find({ name: regex });
+
+//   return result;
+// };
+
 export const productService = {
   createProductIntoDB,
   getAllProductsFromDb,
   getSingleProductFromDB,
   deleteOneProductFromDB,
   updateQuantityOnInventory,
+  // productSearchByName,
 };

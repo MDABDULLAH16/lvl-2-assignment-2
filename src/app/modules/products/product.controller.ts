@@ -73,10 +73,28 @@ const updateQuantity = async (req: Request, res: Response) => {
   });
 };
 
+// const searchProduct = async (req: Request, res: Response) => {
+//   try {
+//     const result = await productService.productSearchByName();
+//     res.status(200).json({
+//       success: true,
+//       message: "Products matching search term '{VALUE}' fetched successfully!",
+//       data: result,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: 'Product Not Found',
+//       error: error,
+//     });
+//   }
+// };
+
 export const productController = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   deleteOneProduct,
   updateQuantity,
+  // searchProduct,
 };
