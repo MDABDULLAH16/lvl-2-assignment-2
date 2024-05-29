@@ -47,10 +47,11 @@ const getAllProducts = async (req: Request, res: Response) => {
         : 'Products fetched successfully!',
       data: data,
     });
-  } catch (error: any) {
-    res.json({
+  } catch (error) {
+    res.status(500).json({
       success: false,
-      message: error.message,
+      message: 'Something is wrong',
+      error: error,
     });
   }
 };
@@ -73,7 +74,7 @@ const deleteOneProduct = async (req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: 'Product deleted successfully!',
-    data: null,
+    data: result,
   });
 };
 

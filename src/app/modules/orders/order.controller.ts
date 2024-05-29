@@ -45,10 +45,11 @@ const getOrders = async (req: Request, res: Response) => {
         : 'Order fetched successfully!',
       data: result,
     });
-  } catch (error: any) {
-    res.json({
+  } catch (error) {
+    res.status(500).json({
       success: false,
-      message: error.message,
+      message: 'Something is Wrong',
+      error: error,
     });
   }
 };
