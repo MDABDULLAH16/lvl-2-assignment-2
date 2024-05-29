@@ -15,6 +15,9 @@ app.get('/', (req: Request, res: Response) => {
   const a = 10;
 
   res.send(a);
+  res.status(200).json({
+    message: 'Hello Assignment 2',
+  });
 });
 
 //Not Found Route
