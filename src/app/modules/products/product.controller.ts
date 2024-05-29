@@ -24,18 +24,23 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 const getAllProducts = async (req: Request, res: Response) => {
+  const { searchTerm } = req.query;
   try {
-    const result = await productService.getAllProductsFromDb();
+    const data = await productService.getAllProductsFromDb(
+      searchTerm as string,
+    );
+
     res.status(200).json({
       success: true,
-      message: 'Get products successfully',
-      data: result,
+      message: searchTerm
+        ? `Products matching search term '${searchTerm}' fetched successfully!`
+        : 'Products fetched successfully!',
+      data: data,
     });
-  } catch (error) {
-    res.status(500).json({
+  } catch (error: any) {
+    res.json({
       success: false,
-      message: 'Something is wrong',
-      error: error,
+      message: error.message,
     });
   }
 };
