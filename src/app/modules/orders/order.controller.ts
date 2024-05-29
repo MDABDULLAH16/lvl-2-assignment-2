@@ -1,10 +1,21 @@
 import { Request, Response } from 'express';
 import { orderService } from './order.service';
+import { orderValidationSchema } from './order.validationJoi';
 
 const createOrderReq = async (req: Request, res: Response) => {
   try {
     const order = req.body.order;
-    const result = await orderService.createOrderIntoDB(order);
+
+    const { error, value } = orderValidationSchema.validate(order);
+
+    if (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Something is wrong',
+        error,
+      });
+    }
+    const result = await orderService.createOrderIntoDB(value);
 
     //   return result;
     //will be response here
@@ -24,18 +35,20 @@ const createOrderReq = async (req: Request, res: Response) => {
 };
 
 const getOrders = async (req: Request, res: Response) => {
+  const { email } = req.body;
   try {
-    const result = await orderService.getOrderFromDB();
+    const result = await orderService.getOrderFromDB(email);
     res.status(200).json({
       success: true,
-      message: 'Orders fetched successfully!',
+      message: email
+        ? `Order matching search term '${email}' fetched successfully!`
+        : 'Order fetched successfully!',
       data: result,
     });
-  } catch (error) {
-    res.status(200).json({
+  } catch (error: any) {
+    res.json({
       success: false,
-      message: 'Something is wrong!',
-      data: error,
+      message: error.message,
     });
   }
 };

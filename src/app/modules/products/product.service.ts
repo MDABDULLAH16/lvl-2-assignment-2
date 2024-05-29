@@ -18,8 +18,6 @@ const getAllProductsFromDb = async (searchValue: string) => {
     : {};
 
   return await productModel.find(query);
-  // const result = await productModel.find();
-  // return result;
 };
 
 //get single product from db

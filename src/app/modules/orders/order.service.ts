@@ -6,8 +6,14 @@ const createOrderIntoDB = async (order: Order) => {
   return result;
 };
 
-const getOrderFromDB = async () => {
-  const result = await orderModel.find();
+const getOrderFromDB = async (email: string) => {
+  const query = email
+    ? {
+        $or: [{ name: { $regex: email, $options: 'i' } }],
+      }
+    : {};
+
+  const result = await orderModel.find(query);
   return result;
 };
 
