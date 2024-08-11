@@ -9,7 +9,7 @@ const createOrderIntoDB = async (order: Order) => {
 const getOrderFromDB = async (email: string) => {
   const query = email
     ? {
-        $or: [{ name: { $regex: email, $options: 'i' } }],
+        $or: [{ email: { $regex: email, $options: 'i' } }],
       }
     : {};
 
