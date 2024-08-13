@@ -1,41 +1,40 @@
 # **Instruction**
 
-**Step - 1:** Create an `eslint.config.mjs` and copy the code from: 
+**Step - 1:** Clone the repository:: 
 <br> 
-[Eslint File](https://github.com/ShafiaChy/Eslint-Config-Setup/blob/main/eslint.config.mjs)
+https://github.com/MDABDULLAH16/lvl-2-assignment-2
 <br>
 
-*Delete the files `eslintrc` and `.eslintignore`*
-
-**Step - 2:** Copy/paste the following lines and paste inside `script` in `package.json` code from given in the package.json
+**Step - 2:** Navigate to the project directory:
 ```
-
-    "lint": "npx eslint src --ignore-pattern .ts",
-    "lint:fix": "npx eslint src --fix",
-    "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "prettier:fix": "npx prettier --write src",
-
+cd your-repository
 ```
 
 <br>
 
-**Step - 3:** Install the `prettier` package
+**Step - 3:** Install dependencies:
 
 ```
-    npm install --save-dev prettier
+    npm install 
 ```
 
 <br>
 
-<br>
 
-*If prettier does not work*, follow step 4:
-
-**Step - 4:** Add the code below to the `settings.json` file:
+**Step - 4:** Set Environment Variables on .env file:
 
 ```
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true,
+     MONGO_URI=mongodb: from mongodb
+     PORT=5000
+```
+
+<br>
+
+**Step - 5:** start the server :
+
+```
+    npm run start:dev
+
 ```
 
 <br>
