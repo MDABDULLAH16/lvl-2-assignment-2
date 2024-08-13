@@ -3,13 +3,17 @@ export interface Variant {
   value: string;
 }
 
+// export interface Inventory {
+//   quantity: {
+//     type: number;
+//   };
+//   inStock: {
+//     type: boolean;
+//   };
+// }
 export interface Inventory {
-  quantity: {
-    type: number;
-  };
-  inStock: {
-    type: boolean;
-  };
+  quantity: number;
+  inStock: boolean;
 }
 
 export interface Product {

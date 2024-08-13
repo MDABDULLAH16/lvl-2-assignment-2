@@ -12,10 +12,9 @@ router.get('/', productController.getAllProducts);
 //find one product
 router.get('/:productId', productController.getSingleProduct);
 
+router.put('/:productId', productController.updateQuantity);
 //delete one product
 router.delete('/:productId', productController.deleteOneProduct);
-
-router.put('/:productId', productController.updateQuantity);
 
 // router.get('/api/products?searchTerm=iphone', productController.searchProduct);
 

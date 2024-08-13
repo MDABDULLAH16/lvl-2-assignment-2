@@ -33,8 +33,18 @@ const deleteOneProductFromDB = async (_id: string) => {
 };
 
 const updateQuantityOnInventory = async (_id: string) => {
-  const product: any = await productModel.findOne({ _id });
+  const product = (await productModel.findOne({ _id })) as Product;
+  if (
+    !product ||
+    !product.inventory ||
+    typeof product.inventory.quantity !== 'number'
+  ) {
+    throw new Error(
+      'Product or inventory not found, or invalid inventory quantity.',
+    );
+  }
   const newQuantity = product.inventory.quantity - 1;
+
   const result = await productModel.updateOne(
     { _id },
     // for decrement quantity only
@@ -43,12 +53,27 @@ const updateQuantityOnInventory = async (_id: string) => {
   );
   return result;
 };
-
+const updateProductInventory = async (
+  productId: string,
+  updateData: { quantity: number; inStock: boolean },
+) => {
+  return await productModel.findByIdAndUpdate(
+    productId,
+    {
+      $set: {
+        'inventory.quantity': updateData.quantity,
+        'inventory.inStock': updateData.inStock,
+      },
+    },
+    { new: true },
+  );
+};
 export const productService = {
   createProductIntoDB,
   getAllProductsFromDb,
   getSingleProductFromDB,
   deleteOneProductFromDB,
   updateQuantityOnInventory,
+  updateProductInventory,
   // productSearchByName,
 };

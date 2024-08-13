@@ -1,5 +1,8 @@
+// import mongoose from 'mongoose';
+
 import { Order } from './order.interface';
 import { orderModel } from './order.model';
+// / Create a New Order
 
 const createOrderIntoDB = async (order: Order) => {
   const result = await orderModel.create(order);

@@ -16,19 +16,9 @@ app.get('/', (req: Request, res: Response) => {
     message: 'Hello, Assignment-2',
   });
 });
-
-//Not Found Route
-app.get('*/', OrderRouter, async (req: Request, res: Response) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route Not Found',
-  });
-});
-app.get('*/', ProductRouter, async (req: Request, res: Response) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route Not Found',
-  });
+// Not Found Route
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
 });
 
 export default app;

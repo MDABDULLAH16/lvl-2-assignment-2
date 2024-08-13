@@ -5,7 +5,7 @@ import productJoiSchema from './product.validationJoi';
 const createProduct = async (req: Request, res: Response) => {
   try {
     //get request from any where
-    const product = req.body.product;
+    const product = req.body;
     const { error, value } = productJoiSchema.validate(product);
 
     if (error) {
@@ -63,7 +63,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   const result = await productService.getSingleProductFromDB(productId);
   res.status(200).json({
     success: true,
-    message: 'find the product successfully',
+    message: 'Product fetched successfully!',
     data: result,
   });
 };
@@ -71,21 +71,32 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const deleteOneProduct = async (req: Request, res: Response) => {
   const productId = req.params.productId;
   const result = await productService.deleteOneProductFromDB(productId);
-  res.status(200).json({
-    success: true,
-    message: 'Product deleted successfully!',
-    data: result,
-  });
+
+  if (result) {
+    res.status(200).json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: null,
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      message: 'Product not found!',
+      data: null,
+    });
+  }
 };
 
 const updateQuantity = async (req: Request, res: Response) => {
   const productId = req.params.productId;
 
   const result = await productService.updateQuantityOnInventory(productId);
+  const originalProduct =
+    await productService.getSingleProductFromDB(productId);
   res.status(200).json({
     success: true,
     message: 'Quantity updated successfully!',
-    data: result,
+    data: originalProduct || result,
   });
 };
 
