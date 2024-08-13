@@ -95,7 +95,7 @@ const updateQuantity = async (req: Request, res: Response) => {
     await productService.getSingleProductFromDB(productId);
   res.status(200).json({
     success: true,
-    message: 'Quantity updated successfully!',
+    message: 'Product updated successfully!',
     data: originalProduct || result,
   });
 };
